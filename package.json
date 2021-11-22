@@ -1,0 +1,59 @@
+{
+  "name": "lean-package",
+  "version": "1.0.0",
+  "description": "A tool for cleaning package.json before publishing",
+  "bin": {
+    "lean-package": "./bin/lean-package"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "lint": "eslint --max-warnings 0 \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit -p .",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "jest": "jest --coverage --passWithNoTests",
+    "test": "yarn lint && yarn typecheck && yarn format:check && yarn jest",
+    "clean": "rm -rf lib coverage",
+    "build": "yarn clean && rollup -c && prettier --write lib",
+    "prepublishOnly": "yarn clean && yarn build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@sstur/clargs": "^1.4.0",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.0.6",
+    "eslint": "^8.20.0",
+    "eslint-config-xt": "^1.7.0",
+    "jest": "^28.1.3",
+    "prettier": "^2.7.1",
+    "rollup": "^2.77.0",
+    "ts-jest": "^28.0.7",
+    "typescript": "^4.7.4"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "eslintConfig": {
+    "extends": "xt",
+    "ignorePatterns": [
+      "/lib"
+    ],
+    "rules": {
+      "@typescript-eslint/consistent-type-imports": "off"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always"
+  },
+  "homepage": "https://github.com/sstur/lean-package",
+  "repository": "github:sstur/lean-package",
+  "license": "ISC"
+}
