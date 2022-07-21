@@ -75,6 +75,7 @@ const copyProps = new Set([
   'private',
   'publishConfig',
   'repository',
+  'types',
   'version',
 ]);
 
