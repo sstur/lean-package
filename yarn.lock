@@ -644,10 +644,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sstur/clargs@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@sstur/clargs/-/clargs-1.4.0.tgz#03ea0a6ad4d3c009e0231d5bedc2515c53f6546b"
-  integrity sha512-UqPOG7d0V/jxUqc04WstQwgrPBRt8B2DYOd2dM9JGlUH/oEY7phrH9N9l0vpnEsWQ8z7LY3pxTII+OYohmqHjA==
+"@sstur/clargs@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@sstur/clargs/-/clargs-1.5.0.tgz#5a0d77a71f308aa5702997ab9bf5f7e93775df74"
+  integrity sha512-1MYy5FMOstgT91t1yqM4ZiTp68HBiBpxQm2WYUdvUYe0XmQYcgq8XCyoLiIXeXZRAytQcnndRDE/TG1di5l76g==
 
 "@types/babel__core@^7.1.14":
   version "7.1.19"
