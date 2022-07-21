@@ -22,6 +22,12 @@ export const schema = defineSchema(({ arg, flag }) => ({
     typeLabel: '<name>',
     description: 'Override "name" field in the output package.json',
   }),
+  description: arg({
+    alias: 'd',
+    optional: true,
+    typeLabel: '<description>',
+    description: 'Override "description" field in the output package.json',
+  }),
   silent: flag({
     alias: 's',
     description: 'Do not output any extraneous messaging',
@@ -86,7 +92,10 @@ async function main() {
   const inputPath = params.input ?? 'package.json';
   const source = await fs.readFile(inputPath, 'utf8');
   const json = JSON.parse(source);
-  const result: Record<string, unknown> = { name: '' };
+  const result: Record<string, unknown> = {
+    name: '',
+    description: '',
+  };
   for (const [key, value] of Object.entries(json)) {
     if (copyProps.has(key)) {
       result[key] = value;
@@ -94,6 +103,9 @@ async function main() {
   }
   if (params.name) {
     result.name = params.name;
+  }
+  if (params.description) {
+    result.description = params.description;
   }
   const output = JSON.stringify(result, null, 2) + '\n';
   const outputPath = params.output;
