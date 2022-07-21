@@ -1,6 +1,6 @@
 {
   "name": "lean-package",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A tool for cleaning package.json before publishing",
   "bin": {
     "lean-package": "./bin/lean-package"
