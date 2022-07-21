@@ -6,7 +6,8 @@
     "lean-package": "./bin/lean-package"
   },
   "files": [
-    "lib"
+    "bin",
+    "index.js"
   ],
   "scripts": {
     "lint": "eslint --max-warnings 0 \"src/**/*.{ts,tsx}\"",
@@ -15,9 +16,9 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
     "jest": "jest --coverage --passWithNoTests",
     "test": "yarn lint && yarn typecheck && yarn format:check && yarn jest",
-    "clean": "rm -rf lib coverage",
-    "build": "yarn clean && rollup -c && prettier --write lib",
-    "prepublishOnly": "yarn clean && yarn build"
+    "clean": "rm -rf build coverage",
+    "copy-files": "cp README.md build/ && cp -R bin build/ && node ./build/index.js > build/package.json",
+    "build": "yarn clean && rollup -c && yarn copy-files && prettier --write build"
   },
   "dependencies": {},
   "devDependencies": {
@@ -42,7 +43,7 @@
   "eslintConfig": {
     "extends": "xt",
     "ignorePatterns": [
-      "/lib"
+      "/build"
     ],
     "rules": {
       "@typescript-eslint/consistent-type-imports": "off"
