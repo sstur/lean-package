@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import fs from 'fs/promises';
+import { join } from 'path';
 
 import { createParser, defineSchema, renderUsage } from '@sstur/clargs';
 
@@ -85,7 +86,10 @@ async function main() {
     return;
   }
   if (params.version) {
-    const version = process.env.npm_package_version || '0.0.0';
+    const root = __dirname.endsWith('/src') ? join(__dirname, '..') : __dirname;
+    const source = await fs.readFile(join(root, 'package.json'), 'utf8');
+    const parsed = JSON.parse(source);
+    const version = parsed.version || '0.0.0';
     console.log(`v${version}`);
     return;
   }
