@@ -14,8 +14,8 @@
     "typecheck": "tsc --noEmit -p .",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
-    "jest": "jest --coverage --passWithNoTests",
-    "test": "pnpm run lint && pnpm run typecheck && pnpm run format:check && pnpm run jest",
+    "unit": "jest --coverage --passWithNoTests",
+    "test": "pnpm run lint && pnpm run typecheck && pnpm run format:check && pnpm run unit",
     "clean": "rm -rf build coverage",
     "copy-files": "cp README.md build/ && cp -R bin build/ && node ./build/index.js --output build/package.json",
     "build": "pnpm run clean && rollup -c && pnpm run copy-files && prettier --write build"
@@ -38,7 +38,10 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/build/"
+    ]
   },
   "eslintConfig": {
     "extends": "xt",
