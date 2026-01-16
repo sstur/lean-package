@@ -15,10 +15,10 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
     "jest": "jest --coverage --passWithNoTests",
-    "test": "yarn lint && yarn typecheck && yarn format:check && yarn jest",
+    "test": "pnpm run lint && pnpm run typecheck && pnpm run format:check && pnpm run jest",
     "clean": "rm -rf build coverage",
     "copy-files": "cp README.md build/ && cp -R bin build/ && node ./build/index.js --output build/package.json",
-    "build": "yarn clean && rollup -c && yarn copy-files && prettier --write build"
+    "build": "pnpm run clean && rollup -c && pnpm run copy-files && prettier --write build"
   },
   "dependencies": {},
   "devDependencies": {
@@ -54,6 +54,7 @@
     "trailingComma": "all",
     "arrowParens": "always"
   },
+  "packageManager": "pnpm@8.15.9",
   "homepage": "https://github.com/sstur/lean-package",
   "repository": "github:sstur/lean-package",
   "license": "ISC"
