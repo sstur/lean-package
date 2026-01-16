@@ -17,7 +17,7 @@
     "jest": "jest --coverage --passWithNoTests",
     "test": "yarn lint && yarn typecheck && yarn format:check && yarn jest",
     "clean": "rm -rf build coverage",
-    "copy-files": "cp README.md build/ && cp -R bin build/ && node ./build/index.js > build/package.json",
+    "copy-files": "cp README.md build/ && cp -R bin build/ && node ./build/index.js --output build/package.json",
     "build": "yarn clean && rollup -c && yarn copy-files && prettier --write build"
   },
   "dependencies": {},
