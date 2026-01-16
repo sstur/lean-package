@@ -29,6 +29,13 @@ export const schema = defineSchema(({ arg, flag }) => ({
     typeLabel: '<description>',
     description: 'Override "description" field in the output package.json',
   }),
+  copy: arg({
+    alias: 'c',
+    optional: true,
+    typeLabel: '<copy>',
+    description:
+      'Additionally copy these comma delimited fields to the output package.json',
+  }),
   silent: flag({
     alias: 's',
     description: 'Do not output any extraneous messaging',
@@ -45,7 +52,7 @@ export const schema = defineSchema(({ arg, flag }) => ({
 
 // List of valid non-dev properties of package.json
 // Sourced from https://docs.npmjs.com/cli/v8/configuring-npm/package-json
-const copyProps = new Set([
+const defaultCopyProps = new Set([
   'author',
   'bin',
   'browser',
@@ -102,8 +109,15 @@ async function main() {
     name: '',
     description: '',
   };
+  const cliCopyProps = new Set(
+    (params.copy || '')
+      .split(',')
+      .filter(Boolean)
+      .map((s) => s.trim()),
+  );
+  const allCopyProps = new Set([...defaultCopyProps, ...cliCopyProps]);
   for (const [key, value] of Object.entries(json)) {
-    if (copyProps.has(key)) {
+    if (allCopyProps.has(key)) {
       result[key] = value;
     }
   }
